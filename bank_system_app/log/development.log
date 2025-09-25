@@ -1,0 +1,673 @@
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-09-22 04:12:08.102909', '2025-09-22 04:12:08.102910') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBanks (20250922041148)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "banks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250922041148') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to CreateAccounts (20250922041154)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "account_number" varchar, "account_holder" varchar, "balance" decimal, "account_type" varchar, "bank_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_0ea11b1ca4"
+FOREIGN KEY ("bank_id")
+  REFERENCES "banks" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_accounts_on_bank_id" ON "accounts" ("bank_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250922041154') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to CreateTransactions (20250922041201)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "transaction_type" varchar, "amount" decimal, "description" varchar, "account_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250922041201') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+Started GET "/" for ::1 at 2025-09-22 09:47:48 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  Rendered banks/index.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 831.0ms | GC: 22.0ms)
+Completed 500 Internal Server Error in 867ms (ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 22.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method 'javascript_importmap_tags' for an instance of #<Class:0x0000000126d514a8>)
+Caused by: NameError (undefined local variable or method 'javascript_importmap_tags' for an instance of #<Class:0x0000000126d514a8>)
+
+Information for: ActionView::Template::Error (undefined local variable or method 'javascript_importmap_tags' for an instance of #<Class:0x0000000126d514a8>):
+     7:     <%= csp_meta_tag %>
+     8:     
+     9:     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    10:     <%= javascript_importmap_tags %>
+    11:     
+    12:     <style>
+    13:       body {
+  
+app/views/layouts/application.html.erb:10
+
+Information for cause: NameError (undefined local variable or method 'javascript_importmap_tags' for an instance of #<Class:0x0000000126d514a8>):
+  
+app/views/layouts/application.html.erb:10
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+Started GET "/" for ::1 at 2025-09-22 09:51:58 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  Rendered banks/index.html.erb within layouts/application (Duration: 3.9ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 98.9ms | GC: 3.2ms)
+Completed 200 OK in 127ms (Views: 99.7ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 15.1ms)
+
+
+Started GET "/banks" for ::1 at 2025-09-22 09:54:34 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  Rendered banks/index.html.erb within layouts/application (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 44.8ms | GC: 18.6ms)
+Completed 200 OK in 46ms (Views: 45.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 18.6ms)
+
+
+Started GET "/banks" for ::1 at 2025-09-22 09:54:36 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  Rendered banks/index.html.erb within layouts/application (Duration: 5.1ms | GC: 2.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.7ms | GC: 8.7ms)
+Completed 200 OK in 17ms (Views: 16.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 10.7ms)
+
+
+Started GET "/transactions" for ::1 at 2025-09-22 09:54:37 +0530
+Processing by TransactionsController#index as HTML
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.3ms (0 queries, 0 cached) | GC: 0.9ms)
+
+
+  
+NoMethodError (undefined method 'page' for an instance of ActiveRecord::Relation):
+  
+app/controllers/transactions_controller.rb:3:in 'TransactionsController#index'
+Started GET "/banks/new" for ::1 at 2025-09-22 09:54:42 +0530
+Processing by BanksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/new.html.erb within layouts/application
+  Rendered banks/new.html.erb within layouts/application (Duration: 9.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | GC: 0.0ms)
+Completed 200 OK in 23ms (Views: 12.5ms | ActiveRecord: 0.4ms (0 queries, 0 cached) | GC: 3.1ms)
+
+
+Started POST "/banks" for ::1 at 2025-09-22 09:54:49 +0530
+Processing by BanksController#create as HTML
+  Parameters: {"authenticity_token" => "yi8TUvMqZRRh9GJ52zCKI51P5s--b7mUf8lOPM_erzmbP5E8uQToq9HzRHotnLBf6EGVZ8M7dr-O4r0jCqizqw", "bank" => {"name" => "Bank of Baroda"}, "commit" => "Create Bank"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/controllers/banks_controller.rb:19:in 'BanksController#create'
+  [1m[36mBank Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" WHERE "banks"."name" = ? LIMIT ?[0m  [["name", "Bank of Baroda"], ["LIMIT", 1]]
+  ↳ app/controllers/banks_controller.rb:19:in 'BanksController#create'
+  [1m[36mBank Create (0.2ms)[0m  [1m[32mINSERT INTO "banks" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Bank of Baroda"], ["created_at", "2025-09-22 04:24:49.470657"], ["updated_at", "2025-09-22 04:24:49.470657"]]
+  ↳ app/controllers/banks_controller.rb:19:in 'BanksController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/controllers/banks_controller.rb:19:in 'BanksController#create'
+Redirected to http://localhost:3000/banks/1
+Completed 302 Found in 9ms (ActiveRecord: 1.7ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/banks/1" for ::1 at 2025-09-22 09:54:49 +0530
+Processing by BanksController#show as HTML
+  Parameters: {"id" => "1"}
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/banks_controller.rb:45:in 'BanksController#set_bank'
+  Rendering layout layouts/application.html.erb
+  Rendering banks/show.html.erb within layouts/application
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.0ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/show.html.erb:21
+  [1m[36mAccount Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/show.html.erb:25
+  [1m[36mAccount Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "accounts" WHERE "accounts"."bank_id" = ? LIMIT ?[0m  [["bank_id", 1], ["LIMIT", 1]]
+  ↳ app/views/banks/show.html.erb:30
+  Rendered banks/show.html.erb within layouts/application (Duration: 11.5ms | GC: 3.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | GC: 4.6ms)
+Completed 200 OK in 38ms (Views: 13.6ms | ActiveRecord: 0.8ms (6 queries, 0 cached) | GC: 11.1ms)
+
+
+Started GET "/banks/1/accounts/new" for ::1 at 2025-09-22 09:54:52 +0530
+Processing by AccountsController#new as HTML
+  Parameters: {"bank_id" => "1"}
+  [1m[36mBank Load (0.3ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  Rendering layout layouts/application.html.erb
+  Rendering accounts/new.html.erb within layouts/application
+  Rendered accounts/new.html.erb within layouts/application (Duration: 9.6ms | GC: 2.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.0ms | GC: 2.3ms)
+Completed 200 OK in 35ms (Views: 12.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 11.2ms)
+
+
+Started POST "/banks/1/accounts" for ::1 at 2025-09-22 09:55:08 +0530
+Processing by AccountsController#create as HTML
+  Parameters: {"authenticity_token" => "dnfKrh_dllbj50_HdK_B4d2gqyZeTQKeKcAOhYJK6CviWADLar30SF86pBItJ5NJS7nrhy7fPY6viXahmHKPdg", "account" => {"account_holder" => "sirisha", "account_type" => "savings", "balance" => "5000"}, "commit" => "Create Account", "bank_id" => "1"}
+  [1m[36mBank Load (0.3ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/controllers/accounts_controller.rb:20:in 'AccountsController#create'
+  [1m[36mAccount Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "accounts" WHERE "accounts"."account_number" = ? LIMIT ?[0m  [["account_number", "14861"], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:20:in 'AccountsController#create'
+  [1m[36mAccount Create (0.2ms)[0m  [1m[32mINSERT INTO "accounts" ("account_number", "account_holder", "balance", "account_type", "bank_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["account_number", "14861"], ["account_holder", "sirisha"], ["balance", 5000.0], ["account_type", "savings"], ["bank_id", 1], ["created_at", "2025-09-22 04:25:08.698867"], ["updated_at", "2025-09-22 04:25:08.698867"]]
+  ↳ app/controllers/accounts_controller.rb:20:in 'AccountsController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/controllers/accounts_controller.rb:20:in 'AccountsController#create'
+Redirected to http://localhost:3000/banks/1/accounts/1
+Completed 302 Found in 12ms (ActiveRecord: 1.9ms (3 queries, 0 cached) | GC: 2.4ms)
+
+
+Started GET "/banks/1/accounts/1" for ::1 at 2025-09-22 09:55:08 +0530
+Processing by AccountsController#show as HTML
+  Parameters: {"bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  Rendering layout layouts/application.html.erb
+  Rendering accounts/show.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."account_id" = ? LIMIT ?[0m  [["account_id", 1], ["LIMIT", 1]]
+  ↳ app/views/accounts/show.html.erb:64
+  Rendered accounts/show.html.erb within layouts/application (Duration: 3.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.7ms | GC: 0.9ms)
+Completed 200 OK in 11ms (Views: 6.0ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 1.6ms)
+
+
+Started PATCH "/banks/1/accounts/1/deposit" for ::1 at 2025-09-22 09:55:15 +0530
+Processing by AccountsController#deposit as HTML
+  Parameters: {"authenticity_token" => "KpBkkcmH7XGdhewx7WAeBDxoh60c1LTspLXMaKFY9f2fjlMUv1-lHP0l9xJt58HqVSxh0NGn90FlDIYSBgGzFA", "amount" => "6000", "commit" => "Deposit", "bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.3ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/models/account.rb:20:in 'Account#deposit'
+  [1m[36mAccount Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "accounts" WHERE "accounts"."account_number" = ? AND "accounts"."id" != ? LIMIT ?[0m  [["account_number", "14861"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/account.rb:20:in 'Account#deposit'
+  [1m[36mAccount Update (0.2ms)[0m  [1m[33mUPDATE "accounts" SET "balance" = ?, "updated_at" = ? WHERE "accounts"."id" = ?[0m  [["balance", 11000.0], ["updated_at", "2025-09-22 04:25:15.496323"], ["id", 1]]
+  ↳ app/models/account.rb:20:in 'Account#deposit'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/models/account.rb:20:in 'Account#deposit'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/models/account.rb:21:in 'Account#deposit'
+  [1m[36mTransaction Create (1.0ms)[0m  [1m[32mINSERT INTO "transactions" ("transaction_type", "amount", "description", "account_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["transaction_type", "deposit"], ["amount", 6000.0], ["description", "Deposit of $6000.0"], ["account_id", 1], ["created_at", "2025-09-22 04:25:15.503752"], ["updated_at", "2025-09-22 04:25:15.503752"]]
+  ↳ app/models/account.rb:21:in 'Account#deposit'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/models/account.rb:21:in 'Account#deposit'
+Redirected to http://localhost:3000/banks/1/accounts/1
+Completed 302 Found in 23ms (ActiveRecord: 3.5ms (5 queries, 0 cached) | GC: 1.8ms)
+
+
+Started GET "/banks/1/accounts/1" for ::1 at 2025-09-22 09:55:15 +0530
+Processing by AccountsController#show as HTML
+  Parameters: {"bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  Rendering layout layouts/application.html.erb
+  Rendering accounts/show.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."account_id" = ? LIMIT ?[0m  [["account_id", 1], ["LIMIT", 1]]
+  ↳ app/views/accounts/show.html.erb:64
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ? ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["account_id", 1], ["LIMIT", 20]]
+  ↳ app/views/accounts/show.html.erb:75
+  Rendered accounts/show.html.erb within layouts/application (Duration: 3.2ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | GC: 0.5ms)
+Completed 200 OK in 7ms (Views: 5.1ms | ActiveRecord: 0.3ms (4 queries, 0 cached) | GC: 0.5ms)
+
+
+Started PATCH "/banks/1/accounts/1/withdraw" for ::1 at 2025-09-22 09:55:19 +0530
+Processing by AccountsController#withdraw as HTML
+  Parameters: {"authenticity_token" => "-3yFIp8ecO2VnVjDhc059jrFflaUEjE5QPK0z7rsQYrHYv6SNuJRckkcoTNASh-BfgXN5NzT5dS3M65MaNonvA", "amount" => "2000", "commit" => "Withdraw", "bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.3ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/models/account.rb:43:in 'Account#withdraw'
+  [1m[36mAccount Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "accounts" WHERE "accounts"."account_number" = ? AND "accounts"."id" != ? LIMIT ?[0m  [["account_number", "14861"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/account.rb:43:in 'Account#withdraw'
+  [1m[36mAccount Update (0.2ms)[0m  [1m[33mUPDATE "accounts" SET "balance" = ?, "updated_at" = ? WHERE "accounts"."id" = ?[0m  [["balance", 9000.0], ["updated_at", "2025-09-22 04:25:19.591182"], ["id", 1]]
+  ↳ app/models/account.rb:43:in 'Account#withdraw'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/models/account.rb:43:in 'Account#withdraw'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/models/account.rb:44:in 'Account#withdraw'
+  [1m[36mTransaction Create (1.1ms)[0m  [1m[32mINSERT INTO "transactions" ("transaction_type", "amount", "description", "account_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["transaction_type", "withdrawal"], ["amount", 2000.0], ["description", "Withdrawal of $2000.0"], ["account_id", 1], ["created_at", "2025-09-22 04:25:19.594304"], ["updated_at", "2025-09-22 04:25:19.594304"]]
+  ↳ app/models/account.rb:44:in 'Account#withdraw'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/models/account.rb:44:in 'Account#withdraw'
+Redirected to http://localhost:3000/banks/1/accounts/1
+Completed 302 Found in 19ms (ActiveRecord: 3.3ms (5 queries, 0 cached) | GC: 4.3ms)
+
+
+Started GET "/banks/1/accounts/1" for ::1 at 2025-09-22 09:55:19 +0530
+Processing by AccountsController#show as HTML
+  Parameters: {"bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  Rendering layout layouts/application.html.erb
+  Rendering accounts/show.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."account_id" = ? LIMIT ?[0m  [["account_id", 1], ["LIMIT", 1]]
+  ↳ app/views/accounts/show.html.erb:64
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ? ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["account_id", 1], ["LIMIT", 20]]
+  ↳ app/views/accounts/show.html.erb:75
+  Rendered accounts/show.html.erb within layouts/application (Duration: 3.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 5.3ms | ActiveRecord: 0.3ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/banks/1/accounts/1/add_interest" for ::1 at 2025-09-22 09:55:22 +0530
+Processing by AccountsController#add_interest as HTML
+  Parameters: {"authenticity_token" => "KcdBOoFOGMrnmrkj65dAycXDgED6ouYy5Uq-nhCIkxbHRbmv-v-DF3y8VakOuV-P8SvfiRJAUldN2HwBh1qGXw", "commit" => "Add Interest", "bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.3ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/models/account.rb:60:in 'Account#add_interest'
+  [1m[36mAccount Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "accounts" WHERE "accounts"."account_number" = ? AND "accounts"."id" != ? LIMIT ?[0m  [["account_number", "14861"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/account.rb:60:in 'Account#add_interest'
+  [1m[36mAccount Update (0.1ms)[0m  [1m[33mUPDATE "accounts" SET "balance" = ?, "updated_at" = ? WHERE "accounts"."id" = ?[0m  [["balance", 9180.0], ["updated_at", "2025-09-22 04:25:22.766779"], ["id", 1]]
+  ↳ app/models/account.rb:60:in 'Account#add_interest'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/models/account.rb:60:in 'Account#add_interest'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/models/account.rb:61:in 'Account#add_interest'
+  [1m[36mTransaction Create (1.3ms)[0m  [1m[32mINSERT INTO "transactions" ("transaction_type", "amount", "description", "account_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["transaction_type", "interest"], ["amount", 180.0], ["description", "Interest added: $180.0"], ["account_id", 1], ["created_at", "2025-09-22 04:25:22.770375"], ["updated_at", "2025-09-22 04:25:22.770375"]]
+  ↳ app/models/account.rb:61:in 'Account#add_interest'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/models/account.rb:61:in 'Account#add_interest'
+Redirected to http://localhost:3000/banks/1/accounts/1
+Completed 302 Found in 16ms (ActiveRecord: 3.6ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/banks/1/accounts/1" for ::1 at 2025-09-22 09:55:22 +0530
+Processing by AccountsController#show as HTML
+  Parameters: {"bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  Rendering layout layouts/application.html.erb
+  Rendering accounts/show.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."account_id" = ? LIMIT ?[0m  [["account_id", 1], ["LIMIT", 1]]
+  ↳ app/views/accounts/show.html.erb:64
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ? ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["account_id", 1], ["LIMIT", 20]]
+  ↳ app/views/accounts/show.html.erb:75
+  Rendered accounts/show.html.erb within layouts/application (Duration: 3.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 5.3ms | ActiveRecord: 0.3ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/banks/1/accounts/1/edit" for ::1 at 2025-09-22 09:55:25 +0530
+Processing by AccountsController#edit as HTML
+  Parameters: {"bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.3ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  Rendering layout layouts/application.html.erb
+  Rendering accounts/edit.html.erb within layouts/application
+  Rendered accounts/edit.html.erb within layouts/application (Duration: 3.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | GC: 0.0ms)
+Completed 200 OK in 13ms (Views: 7.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/banks/1/accounts/1" for ::1 at 2025-09-22 09:55:27 +0530
+Processing by AccountsController#update as HTML
+  Parameters: {"authenticity_token" => "-GFwRNDQ7meePsnNBV5Xiox8yFjY_NwSYLMKv3-iXU4JMRifUIVcb0s2wZL1VolBlcKgt8EnxpAmUoSTI_XWJA", "account" => {"account_holder" => "sirisha", "account_type" => "savings", "balance" => "9180.0"}, "commit" => "Update Account", "bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  ↳ app/controllers/accounts_controller.rb:31:in 'AccountsController#update'
+  [1m[36mAccount Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "accounts" WHERE "accounts"."account_number" = ? AND "accounts"."id" != ? LIMIT ?[0m  [["account_number", "14861"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:31:in 'AccountsController#update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  ↳ app/controllers/accounts_controller.rb:31:in 'AccountsController#update'
+Redirected to http://localhost:3000/banks/1/accounts/1
+Completed 302 Found in 10ms (ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/banks/1/accounts/1" for ::1 at 2025-09-22 09:55:27 +0530
+Processing by AccountsController#show as HTML
+  Parameters: {"bank_id" => "1", "id" => "1"}
+  [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks" WHERE "banks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:74:in 'AccountsController#set_bank'
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["bank_id", 1], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/accounts_controller.rb:78:in 'AccountsController#set_account'
+  Rendering layout layouts/application.html.erb
+  Rendering accounts/show.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" WHERE "transactions"."account_id" = ? LIMIT ?[0m  [["account_id", 1], ["LIMIT", 1]]
+  ↳ app/views/accounts/show.html.erb:64
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ? ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["account_id", 1], ["LIMIT", 20]]
+  ↳ app/views/accounts/show.html.erb:75
+  Rendered accounts/show.html.erb within layouts/application (Duration: 3.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | GC: 0.0ms)
+Completed 200 OK in 11ms (Views: 6.2ms | ActiveRecord: 0.6ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/transactions" for ::1 at 2025-09-22 09:55:28 +0530
+Processing by TransactionsController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method 'page' for an instance of ActiveRecord::Relation):
+  
+app/controllers/transactions_controller.rb:3:in 'TransactionsController#index'
+Started GET "/banks" for ::1 at 2025-09-22 09:55:32 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.1ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 16.5ms | GC: 6.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.1ms | GC: 8.2ms)
+Completed 200 OK in 22ms (Views: 20.9ms | ActiveRecord: 0.9ms (6 queries, 0 cached) | GC: 8.2ms)
+
+
+Started GET "/transactions" for ::1 at 2025-09-22 09:55:34 +0530
+Processing by TransactionsController#index as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.3ms)
+
+
+  
+NoMethodError (undefined method 'page' for an instance of ActiveRecord::Relation):
+  
+app/controllers/transactions_controller.rb:3:in 'TransactionsController#index'
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+Started GET "/transactions" for ::1 at 2025-09-22 10:05:38 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TransactionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/transactions/index.html.erb:4
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["LIMIT", 50]]
+  ↳ app/views/transactions/index.html.erb:17
+  [1m[36mAccount Load (0.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ?[0m  [["id", 1]]
+  ↳ app/views/transactions/index.html.erb:17
+  Rendered transactions/index.html.erb within layouts/application (Duration: 16.8ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 29.3ms | GC: 0.4ms)
+Completed 200 OK in 48ms (Views: 32.4ms | ActiveRecord: 1.5ms (3 queries, 0 cached) | GC: 1.7ms)
+
+
+Started GET "/transactions" for ::1 at 2025-09-22 10:05:40 +0530
+Processing by TransactionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/transactions/index.html.erb:4
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["LIMIT", 50]]
+  ↳ app/views/transactions/index.html.erb:17
+  [1m[36mAccount Load (0.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ?[0m  [["id", 1]]
+  ↳ app/views/transactions/index.html.erb:17
+  Rendered transactions/index.html.erb within layouts/application (Duration: 4.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.6ms | GC: 0.0ms)
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 0.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/transactions" for ::1 at 2025-09-22 10:05:42 +0530
+Processing by TransactionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/transactions/index.html.erb:4
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["LIMIT", 50]]
+  ↳ app/views/transactions/index.html.erb:17
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ?[0m  [["id", 1]]
+  ↳ app/views/transactions/index.html.erb:17
+  Rendered transactions/index.html.erb within layouts/application (Duration: 6.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | GC: 0.0ms)
+Completed 200 OK in 13ms (Views: 12.0ms | ActiveRecord: 0.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/banks" for ::1 at 2025-09-22 10:05:43 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.0ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 16.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 18.1ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 18.9ms | ActiveRecord: 0.7ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2025-09-22 10:05:45 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.2ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.1ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 9.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.9ms | GC: 0.0ms)
+Completed 200 OK in 15ms (Views: 13.8ms | ActiveRecord: 1.0ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2025-09-22 10:05:47 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.0ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.0ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 4.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | GC: 0.0ms)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.3ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2025-09-22 10:05:48 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.1ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 8.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.8ms | GC: 0.0ms)
+Completed 200 OK in 13ms (Views: 12.0ms | ActiveRecord: 0.8ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+Started GET "/" for ::1 at 2025-09-22 15:06:58 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by BanksController#index as */*
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.0ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.0ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 25.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 86.1ms | GC: 9.4ms)
+Completed 200 OK in 123ms (Views: 91.0ms | ActiveRecord: 1.9ms (6 queries, 0 cached) | GC: 9.4ms)
+
+
+Started GET "/" for ::1 at 2025-09-22 15:07:00 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.0ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.0ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 4.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 20.2ms | GC: 0.9ms)
+Completed 200 OK in 21ms (Views: 20.2ms | ActiveRecord: 0.4ms (6 queries, 0 cached) | GC: 0.9ms)
+
+
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <main> at /Users/sramin/Documents/rubyrails/bank_system_app/config/environment.rb:5)
+Started GET "/transactions" for ::1 at 2025-09-22 15:08:47 +0530
+Processing by TransactionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering transactions/index.html.erb within layouts/application
+  [1m[36mTransaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "transactions" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/transactions/index.html.erb:4
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" ORDER BY "transactions"."created_at" DESC LIMIT ?[0m  [["LIMIT", 50]]
+  ↳ app/views/transactions/index.html.erb:17
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ?[0m  [["id", 1]]
+  ↳ app/views/transactions/index.html.erb:17
+  Rendered transactions/index.html.erb within layouts/application (Duration: 20.5ms | GC: 1.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.1ms | GC: 1.1ms)
+Completed 200 OK in 27ms (Views: 22.5ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 2.3ms)
+
+
+Started GET "/banks" for ::1 at 2025-09-22 15:08:48 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.1ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 11.1ms | GC: 1.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.9ms | GC: 1.6ms)
+Completed 200 OK in 16ms (Views: 14.5ms | ActiveRecord: 1.0ms (6 queries, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/" for ::1 at 2025-09-22 15:08:49 +0530
+Processing by BanksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering banks/index.html.erb within layouts/application
+  [1m[36mBank Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "banks" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/banks/index.html.erb:7
+  [1m[36mBank Load (0.1ms)[0m  [1m[34mSELECT "banks".* FROM "banks"[0m
+  ↳ app/views/banks/index.html.erb:20
+  [1m[36mAccount Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:19:in 'Bank#account_count'
+  [1m[36mAccount Sum (0.1ms)[0m  [1m[34mSELECT SUM("accounts"."balance") FROM "accounts" WHERE "accounts"."bank_id" = ?[0m  [["bank_id", 1]]
+  ↳ app/models/bank.rb:7:in 'Bank#total_deposits'
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "savings"]]
+  ↳ app/views/banks/index.html.erb:25
+  [1m[36mAccount Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "accounts" WHERE "accounts"."bank_id" = ? AND "accounts"."account_type" = ?[0m  [["bank_id", 1], ["account_type", "checking"]]
+  ↳ app/views/banks/index.html.erb:26
+  Rendered banks/index.html.erb within layouts/application (Duration: 10.0ms | GC: 1.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.9ms | GC: 1.1ms)
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.8ms (6 queries, 0 cached) | GC: 1.1ms)
+
+

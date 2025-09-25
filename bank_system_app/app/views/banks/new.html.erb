@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">Create New Bank</div>
+  
+  <%= form_with model: @bank, local: true do |form| %>
+    <% if @bank.errors.any? %>
+      <div class="alert">
+        <h4><%= pluralize(@bank.errors.count, "error") %> prohibited this bank from being saved:</h4>
+        <ul>
+          <% @bank.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, placeholder: "Enter bank name" %>
+    </div>
+
+    <div>
+      <%= form.submit "Create Bank", class: "btn btn-success" %>
+      <%= link_to "Cancel", banks_path, class: "btn" %>
+    </div>
+  <% end %>
+</div>

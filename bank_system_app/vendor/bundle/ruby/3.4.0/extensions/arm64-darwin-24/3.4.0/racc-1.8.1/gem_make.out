@@ -1,0 +1,18 @@
+current directory: /Users/sramin/Documents/rubyrails/bank_system_app/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+/Users/sramin/.rbenv/versions/3.4.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/sramin/Documents/rubyrails/bank_system_app/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250922-68580-hw4q0z sitelibdir\=./.gem.20250922-68580-hw4q0z clean
+
+current directory: /Users/sramin/Documents/rubyrails/bank_system_app/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250922-68580-hw4q0z sitelibdir\=./.gem.20250922-68580-hw4q0z
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/sramin/Documents/rubyrails/bank_system_app/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250922-68580-hw4q0z sitelibdir\=./.gem.20250922-68580-hw4q0z install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20250922-68580-hw4q0z/racc
+
+current directory: /Users/sramin/Documents/rubyrails/bank_system_app/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250922-68580-hw4q0z sitelibdir\=./.gem.20250922-68580-hw4q0z clean

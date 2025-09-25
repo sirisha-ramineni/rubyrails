@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-header">
+    <%= @bank.name %> - Bank Details
+    <div style="float: right;">
+      <%= link_to "Edit Bank", edit_bank_path(@bank), class: "btn" %>
+      <%= link_to "Add Account", new_bank_account_path(@bank), class: "btn btn-success" %>
+    </div>
+  </div>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+    <div class="card">
+      <h4>Total Accounts</h4>
+      <p style="font-size: 2em; margin: 0; color: #2c3e50;"><%= @bank.account_count %></p>
+    </div>
+    <div class="card">
+      <h4>Total Deposits</h4>
+      <p style="font-size: 2em; margin: 0; color: #27ae60;">$<%= number_with_precision(@bank.total_deposits, precision: 2) %></p>
+    </div>
+    <div class="card">
+      <h4>Savings Accounts</h4>
+      <p style="font-size: 2em; margin: 0; color: #3498db;"><%= @bank.savings_accounts.count %></p>
+    </div>
+    <div class="card">
+      <h4>Checking Accounts</h4>
+      <p style="font-size: 2em; margin: 0; color: #e74c3c;"><%= @bank.checking_accounts.count %></p>
+    </div>
+  </div>
+  
+  <h3>Accounts</h3>
+  <% if @accounts.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Account Number</th>
+          <th>Account Holder</th>
+          <th>Type</th>
+          <th>Balance</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @accounts.each do |account| %>
+          <tr>
+            <td><%= account.account_number %></td>
+            <td><%= account.account_holder %></td>
+            <td>
+              <span style="padding: 4px 8px; border-radius: 4px; 
+                          background: <%= account.account_type == 'savings' ? '#3498db' : '#e74c3c' %>; 
+                          color: white;">
+                <%= account.account_type.capitalize %>
+              </span>
+            </td>
+            <td>$<%= number_with_precision(account.balance, precision: 2) %></td>
+            <td>
+              <%= link_to "View", bank_account_path(@bank, account), class: "btn" %>
+              <%= link_to "Edit", edit_bank_account_path(@bank, account), class: "btn" %>
+              <%= link_to "Delete", bank_account_path(@bank, account), method: :delete, 
+                          confirm: "Are you sure?", class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No accounts found. <%= link_to "Create the first account", new_bank_account_path(@bank) %>.</p>
+  <% end %>
+</div>

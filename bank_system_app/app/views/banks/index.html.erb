@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-header">
+    All Banks
+    <%= link_to "Add New Bank", new_bank_path, class: "btn btn-success", style: "float: right;" %>
+  </div>
+  
+  <% if @banks.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Bank Name</th>
+          <th>Total Accounts</th>
+          <th>Total Deposits</th>
+          <th>Savings Accounts</th>
+          <th>Checking Accounts</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @banks.each do |bank| %>
+          <tr>
+            <td><%= bank.name %></td>
+            <td><%= bank.account_count %></td>
+            <td>$<%= number_with_precision(bank.total_deposits, precision: 2) %></td>
+            <td><%= bank.savings_accounts.count %></td>
+            <td><%= bank.checking_accounts.count %></td>
+            <td>
+              <%= link_to "View", bank_path(bank), class: "btn" %>
+              <%= link_to "Edit", edit_bank_path(bank), class: "btn" %>
+              <%= link_to "Delete", bank_path(bank), method: :delete, 
+                          confirm: "Are you sure?", class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No banks found. <%= link_to "Create the first bank", new_bank_path %>.</p>
+  <% end %>
+</div>
